@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-21 21:10:04
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-21 21:20:40
+ * @LastEditTime: 2022-07-21 22:36:33
  */
 import { createApp } from "vue";
 import { Quasar } from "quasar";
@@ -14,14 +14,20 @@ import "@quasar/extras/material-icons/material-icons.css";
 
 // Import Quasar css
 import "quasar/src/css/index.sass";
-import "./style.css";
 import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 
-const myApp = createApp(App)
+const myApp = createApp(App);
 
 myApp.use(Quasar, {
   plugins: {}, // import Quasar plugins and add here
-})
+});
+
+myApp.use(router);
+
+// Install the store instance as a plugin
+myApp.use(store);
 
 // Assumes you have a <div id="app"></div> in your index.html
-myApp.mount('#app')
+myApp.mount("#app");
