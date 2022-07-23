@@ -4,10 +4,10 @@
  * @Author: 夏明
  * @Date: 2022-07-21 21:10:04
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-21 22:36:33
+ * @LastEditTime: 2022-07-22 23:28:16
  */
 import { createApp } from "vue";
-import { Quasar } from "quasar";
+import { Quasar, Notify } from "quasar";
 
 // Import icon libraries
 import "@quasar/extras/material-icons/material-icons.css";
@@ -21,7 +21,9 @@ import store from "./store";
 const myApp = createApp(App);
 
 myApp.use(Quasar, {
-  plugins: {}, // import Quasar plugins and add here
+  plugins: {
+    Notify
+  }, // import Quasar plugins and add here
 });
 
 myApp.use(router);
