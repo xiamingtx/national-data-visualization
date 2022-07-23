@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-21 21:57:06
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-23 11:18:25
+ * @LastEditTime: 2022-07-23 22:25:12
 -->
 <template>
   <div class="page">
@@ -17,11 +17,52 @@
       </div>
     </div>
     <div class="content">
-      <div class="content-title">
-        <q-icon class="content-title-icon" name="leaderboard"></q-icon>
-        当前统计国家总数:
-        <div class="content-title-number">
-          {{ count }}
+      <div class="content-main">
+        <div class="content-left">
+          <div class="content-title">
+            <q-icon class="content-title-icon" name="leaderboard"></q-icon>
+            当前统计国家总数:
+            <div class="content-title-number">
+              {{ count }}
+            </div>
+          </div>
+          <div class="content-left-main">
+            <div class="q-pa-md" style="max-width: 350px; width: 300px">
+              <q-toolbar class="bg-primary text-white shadow-2">
+                <q-toolbar-title>
+                  已统计国家
+                  <q-icon name="public" size="1.6rem"></q-icon>
+                </q-toolbar-title>
+              </q-toolbar>
+
+              <q-list bordered>
+                <q-item
+                  v-for="item in data"
+                  :key="item.id"
+                  class="q-my-sm"
+                  clickable
+                  v-ripple
+                >
+                  <q-item-section avatar>
+                    <q-avatar color="primary" text-color="white">
+                      {{ item.CountryName.slice(0, 1) }}
+                    </q-avatar>
+                  </q-item-section>
+
+                  <q-item-section>
+                    <q-item-label>{{ item.CountryName }}</q-item-label>
+                  </q-item-section>
+
+                  <q-item-section side>
+                    <q-icon name="flag" color="green" />
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </div>
+          </div>
+        </div>
+        <div class="content-right">
+          <Pie></Pie>
         </div>
       </div>
     </div>
@@ -31,21 +72,33 @@
 <script setup>
 import { onMounted } from "@vue/runtime-core";
 import { list } from "../../api/country";
+import { generalInfo } from "../../api/country_detail";
 import { ref } from "vue";
+import * as echarts from "echarts";
+import Pie from "../../components/Pie.vue";
 
 const data = ref([]);
 
 const count = ref(0);
 
+const optionsData = ref([]);
+
 const fetchData = () => {
+  getList();
+};
+
+const getList = () => {
   list().then((res) => {
-    console.log(res);
     data.value = res.data;
     count.value = res.totalCount;
   });
 };
 
-onMounted(fetchData);
+onMounted(() => {
+  fetchData();
+});
+
+onMounted(() => {});
 </script>
 
 <style lang="scss">
@@ -77,21 +130,32 @@ onMounted(fetchData);
     display: flex;
     flex-direction: column;
     margin: 20px 0 0 20px;
-    .content-title {
+    .content-main {
       display: flex;
       flex-direction: row;
-      align-items: center;
-      height: 30px;
-      font-size: 18px;
-      line-height: 30px;
-      .content-title-icon {
-        font-size: 22px;
-        color: rgb(206, 21, 21);
-      }
-      .content-title-number {
-        font-size: 24px;
-        font-weight: 600;
-        padding-left: 20px;
+      justify-content: space-around;
+      .content-left {
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+        .content-title {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          height: 30px;
+          font-size: 18px;
+          line-height: 30px;
+          padding-left: 20px;
+          .content-title-icon {
+            font-size: 22px;
+            color: rgb(206, 21, 21);
+          }
+          .content-title-number {
+            font-size: 24px;
+            font-weight: 600;
+            padding-left: 20px;
+          }
+        }
       }
     }
   }
