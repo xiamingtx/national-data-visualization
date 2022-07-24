@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-21 21:57:06
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-23 22:25:12
+ * @LastEditTime: 2022-07-24 17:24:07
 -->
 <template>
   <div class="page">
@@ -62,7 +62,7 @@
           </div>
         </div>
         <div class="content-right">
-          <Pie></Pie>
+          <CountryPie></CountryPie>
         </div>
       </div>
     </div>
@@ -72,22 +72,14 @@
 <script setup>
 import { onMounted } from "@vue/runtime-core";
 import { list } from "../../api/country";
-import { generalInfo } from "../../api/country_detail";
 import { ref } from "vue";
-import * as echarts from "echarts";
-import Pie from "../../components/Pie.vue";
+import CountryPie from "../../components/CountryPie.vue";
 
 const data = ref([]);
 
 const count = ref(0);
 
-const optionsData = ref([]);
-
 const fetchData = () => {
-  getList();
-};
-
-const getList = () => {
   list().then((res) => {
     data.value = res.data;
     count.value = res.totalCount;
@@ -101,7 +93,7 @@ onMounted(() => {
 onMounted(() => {});
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../quasar-variables.sass";
 
 .page {

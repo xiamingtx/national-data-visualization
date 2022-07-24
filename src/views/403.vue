@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-08 08:39:25
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-08 08:39:34
+ * @LastEditTime: 2022-07-24 17:06:56
 -->
 <template>
   <div>无权限</div>
@@ -12,8 +12,8 @@
 
 <script>
 export default {
-  name: '403'
-}
+  name: "403",
+};
 </script>
 
-<style lang=""></style>
+<style lang="" scoped></style>

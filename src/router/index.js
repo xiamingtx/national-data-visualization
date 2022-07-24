@@ -5,7 +5,7 @@
  * @Author: 夏明
  * @Date: 2022-07-21 21:46:44
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-22 22:52:34
+ * @LastEditTime: 2022-07-24 17:09:34
  */
 import { createRouter, createWebHashHistory } from "vue-router";
 
@@ -21,6 +21,18 @@ export const menuRoutes = [
     name: "Countries",
     meta: { title: "总览", icon: "article" },
     component: () => import("../views/Country/Index.vue"),
+  },
+  {
+    path: "detail",
+    name: "Detail",
+    meta: { title: "详情", icon: "lightbulb" },
+    component: () => import("../views/Detail/Index.vue"),
+  },
+  {
+    path: "charts",
+    name: "Charts",
+    meta: { title: "图表", icon: "bar_chart" },
+    component: () => import("../views/Charts/Index.vue"),
   },
 ];
 

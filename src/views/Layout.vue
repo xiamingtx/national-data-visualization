@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-21 21:27:12
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-21 22:40:31
+ * @LastEditTime: 2022-07-24 17:03:53
 -->
 <template>
   <q-layout view="hHh lpR fFf">
@@ -18,6 +18,13 @@
         <q-space />
         <q-avatar>
           <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
+          <q-menu fit>
+            <q-list style="min-width: 100px">
+              <q-item clickable v-close-popup>
+                <q-item-section>Quasar yyds</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
         </q-avatar>
       </q-toolbar>
     </q-header>
@@ -50,13 +57,10 @@
 
 <script setup>
 import { ref } from "vue";
-import { useStore } from "vuex";
 import { menuRoutes } from "../router/index";
 import { useRoute } from "vue-router";
 
 const leftDrawerOpen = ref(false);
-
-const store = useStore();
 
 const route = useRoute();
 

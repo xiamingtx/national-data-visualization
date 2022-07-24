@@ -4,11 +4,11 @@
  * @Author: 夏明
  * @Date: 2022-07-22 22:50:11
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-23 20:47:52
+ * @LastEditTime: 2022-07-24 11:33:14
 -->
 <template>
   <div class="page">
-    <div class="search">
+    <div class="select">
       <div class="q-pa-md" style="max-width: 300px">
         <div class="q-gutter-md">
           <q-select
@@ -39,11 +39,12 @@
         </div>
       </div>
     </div>
-    <div class="q-pa-md">
-      <div class="content-table">
-        <div class="list-icon">
-          <q-icon name="list" size="1.8rem"></q-icon>
-        </div>
+
+    <div class="content-table">
+      <div class="list-icon">
+        <q-icon name="list" size="1.6rem"></q-icon>
+      </div>
+      <div class="q-pa-md">
         <q-table
           title="(最新)概览统计表"
           dense
@@ -103,7 +104,6 @@ const options = ref([]);
 const store = useStore();
 
 const search = () => {
-  console.log(bgData.value);
   if (model.value.length === 0) {
     data.value = bgData.value;
   } else {
@@ -136,13 +136,21 @@ const fetchData = () => {
 onMounted(fetchData);
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .page {
+  margin: 0 40px;
+  display: flex;
+  flex-direction: column;
+  .select {
+    margin-top: 30px;
+    margin-right: 30px;
+  }
   .content-table {
+    position: relative;
     .list-icon {
-      position: relative;
-      top: 34px;
-      left: 175px;
+      position: absolute;
+      top: 25px;
+      left: 195px;
       z-index: 2;
     }
   }
