@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-24 17:16:53
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-24 17:21:23
+ * @LastEditTime: 2022-07-24 19:27:09
 -->
 <template>
   <div
@@ -21,9 +21,12 @@ import { ref, onMounted } from "vue";
 import { generalInfo } from "../api/country_detail";
 import * as echarts from "echarts";
 import {
-  optionsData,
+  optionData,
   legendData,
   pie,
+  title,
+  useTimer,
+  seriesName,
   createPieChart,
 } from "../composables/usePie.js";
 
@@ -36,18 +39,25 @@ const props = defineProps({
     type: Number,
     default: 500,
   },
+  useTimer: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const createPie = () => {
-  (optionsData.value = []), (legendData.value = []);
+  (optionData.value = []), (legendData.value = []);
   generalInfo().then((res) => {
     res.data.forEach((item) => {
-      optionsData.value.push({
+      optionData.value.push({
         name: item["CountryName"],
         value: parseFloat(item["GDP"]).toFixed(1),
       });
       legendData.value.push(item["CountryName"]);
     });
+    title.value = "各国GDP占比";
+    useTimer.value = props.useTimer;
+    seriesName.value = "GDP(亿元)"
     createPieChart();
   });
 };

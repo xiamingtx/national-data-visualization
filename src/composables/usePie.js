@@ -5,23 +5,29 @@
  * @Author: 夏明
  * @Date: 2022-07-23 21:20:45
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-24 12:26:06
+ * @LastEditTime: 2022-07-24 19:26:45
  */
 
 import { ref } from "vue";
 import * as echarts from "echarts";
 
-export const optionsData = ref([]);
+export const optionData = ref([]);
 
 export const legendData = ref([]);
 
 export const pie = ref(null);
 
+export const useTimer = ref(true);
+
+export const title = ref("");
+
+export const seriesName = ref("");
+
 export const createPieChart = () => {
   const myChart = echarts.init(pie.value);
   const option = {
     title: {
-      text: "各国GDP占比",
+      text: title.value,
       left: "center",
     },
     tooltip: {
@@ -35,9 +41,9 @@ export const createPieChart = () => {
     },
     series: [
       {
-        name: "GDP(亿元)",
+        name: seriesName,
         type: "pie",
-        data: optionsData.value,
+        data: optionData.value,
         radius: "55%",
         center: ["50%", "60%"],
         emphasis: {
@@ -57,28 +63,30 @@ export const createPieChart = () => {
     myChart.resize();
   };
 
-  let currentIndex = -1;
+  if (useTimer.value) {
+    let currentIndex = -1;
 
-  setInterval(function () {
-    var dataLen = option.series[0].data.length;
-    // 取消之前高亮的图形
-    myChart.dispatchAction({
-      type: "downplay",
-      seriesIndex: 0,
-      dataIndex: currentIndex,
-    });
-    currentIndex = (currentIndex + 1) % dataLen;
-    // 高亮当前图形
-    myChart.dispatchAction({
-      type: "highlight",
-      seriesIndex: 0,
-      dataIndex: currentIndex,
-    });
-    // 显示 tooltip
-    myChart.dispatchAction({
-      type: "showTip",
-      seriesIndex: 0,
-      dataIndex: currentIndex,
-    });
-  }, 1000);
+    setInterval(function () {
+      var dataLen = option.series[0].data.length;
+      // 取消之前高亮的图形
+      myChart.dispatchAction({
+        type: "downplay",
+        seriesIndex: 0,
+        dataIndex: currentIndex,
+      });
+      currentIndex = (currentIndex + 1) % dataLen;
+      // 高亮当前图形
+      myChart.dispatchAction({
+        type: "highlight",
+        seriesIndex: 0,
+        dataIndex: currentIndex,
+      });
+      // 显示 tooltip
+      myChart.dispatchAction({
+        type: "showTip",
+        seriesIndex: 0,
+        dataIndex: currentIndex,
+      });
+    }, 1000);
+  }
 };
