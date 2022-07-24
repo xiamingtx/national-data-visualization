@@ -5,7 +5,7 @@
  * @Author: 夏明
  * @Date: 2022-07-23 21:20:45
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-24 19:26:45
+ * @LastEditTime: 2022-07-25 00:00:41
  */
 
 import { ref } from "vue";
@@ -23,7 +23,10 @@ export const title = ref("");
 
 export const seriesName = ref("");
 
+export const formatter = ref("");
+
 export const createPieChart = () => {
+  console.log(formatter.value)
   const myChart = echarts.init(pie.value);
   const option = {
     title: {
@@ -32,7 +35,7 @@ export const createPieChart = () => {
     },
     tooltip: {
       trigger: "item",
-      formatter: "{a} <br/>{b} : {c} ({d}%)",
+      formatter: formatter.value,
     },
     legend: {
       orient: "vertical",
@@ -41,7 +44,7 @@ export const createPieChart = () => {
     },
     series: [
       {
-        name: seriesName,
+        name: seriesName.value,
         type: "pie",
         data: optionData.value,
         radius: "55%",

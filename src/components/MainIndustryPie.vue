@@ -2,9 +2,9 @@
  * @Description: Description of this file
  * @Version: 2.0
  * @Author: 夏明
- * @Date: 2022-07-24 17:16:53
+ * @Date: 2022-07-24 23:41:51
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-25 00:08:21
+ * @LastEditTime: 2022-07-25 00:07:43
 -->
 <template>
   <div
@@ -18,7 +18,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { generalInfo } from "../api/country_detail";
+import { recentDetail } from "../api/country_detail";
 import * as echarts from "echarts";
 import {
   optionData,
@@ -46,23 +46,30 @@ const props = defineProps({
   },
   formatter: {
     type: String,
-    default: "{a} <br/>{b} : {c}亿元 ({d}%)",
+    default: "{b} : {c}亿元 ({d}%)",
   },
 });
 
 const createPie = () => {
-  (optionData.value = []), (legendData.value = []);
-  generalInfo().then((res) => {
-    res.data.forEach((item) => {
-      optionData.value.push({
-        name: item["CountryName"],
-        value: item["GDP"],
-      });
-      legendData.value.push(item["CountryName"]);
-    });
-    title.value = "各国GDP占比";
+  recentDetail(1).then((res) => {
+    optionData.value = [
+      {
+        name: "第一产业占比",
+        value: res.data.PrimaryIndustry,
+      },
+      {
+        name: "第二产业占比",
+        value: res.data.SecondaryIndustry,
+      },
+      {
+        name: "第三产业占比",
+        value: res.data.TertiaryIndustry,
+      },
+    ];
+    legendData.value = ["第一产业占比", "第二产业占比", "第三产业占比"];
+    title.value = "三大产业占比";
     useTimer.value = props.useTimer;
-    seriesName.value = "GDP占比";
+    seriesName.value = "";
     formatter.value = props.formatter;
     createPieChart();
   });

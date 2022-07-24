@@ -40,6 +40,7 @@
           :active="item.name === route.name"
           :to="item.path"
         >
+        
           <q-item-section avatar>
             <q-icon :name="item.meta.icon" />
           </q-item-section>

@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-24 10:41:59
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-24 16:48:49
+ * @LastEditTime: 2022-07-24 23:24:40
 -->
 <template>
   <div class="page">
@@ -319,7 +319,6 @@ const fetchData = () => {
             item[key] = "暂无数据";
             continue;
           }
-          item[key] = parseFloat(item[key]).toFixed(1);
         }
         if (
           key === "PrimaryIndustry" ||

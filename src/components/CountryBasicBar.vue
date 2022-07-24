@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-24 18:10:13
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-24 19:26:15
+ * @LastEditTime: 2022-07-24 23:26:25
 -->
 <template>
   <div
@@ -26,8 +26,8 @@ import {
   bar,
   title,
   seriesName,
-  createBarChart,
-} from "../composables/useBar.js";
+  createBasicBarChart,
+} from "../composables/useBasicBar.js";
 
 const props = defineProps({
   width: {
@@ -45,11 +45,11 @@ const createBar = () => {
   details(1).then((res) => {
     res.data.forEach((item) => {
       optionXData.value.unshift(item["InfoYear"]);
-      optionYData.value.unshift(parseFloat(item["GDP"]).toFixed(1));
+      optionYData.value.unshift(item["GDP"]);
     });
     title.value = "历年GDP";
-    seriesName.value = "GDP(亿元)"
-    createBarChart();
+    seriesName.value = "GDP";
+    createBasicBarChart();
   });
 };
 

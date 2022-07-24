@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-22 22:50:11
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-24 11:33:14
+ * @LastEditTime: 2022-07-24 23:24:14
 -->
 <template>
   <div class="page">
@@ -121,8 +121,8 @@ const fetchData = () => {
   generalInfo().then((res) => {
     options.value = [];
     res.data.forEach((item) => {
-      item["GDP"] = parseFloat(item["GDP"]).toFixed(1);
-      item["AvgGDP"] = parseInt(item["AvgGDP"]);
+      item["GDP"] = item["GDP"];
+      item["AvgGDP"] = item["AvgGDP"];
       options.value.push({
         label: item["CountryName"],
         value: item["CountryID"],
