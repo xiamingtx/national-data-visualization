@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-24 17:06:30
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-25 14:11:30
+ * @LastEditTime: 2022-07-25 21:23:32
 -->
 <template>
   <div class="page">
@@ -107,7 +107,7 @@
               <IndustriesBar></IndustriesBar>
             </q-tab-panel>
 
-            <q-tab-panel name="预测">
+            <q-tab-panel name="数据预测">
               <ForeCast></ForeCast>
             </q-tab-panel>
           </q-tab-panels>
@@ -125,7 +125,7 @@ import CountryMultiBar from "../../components/CountryMultiBar.vue";
 import MainIndustryPie from "../../components/MainIndustryPie.vue";
 import GDPIncLine from "../../components/GDPIncLine.vue";
 import IndustriesBar from "../../components/IndustriesBar.vue";
-import ForeCast from "../../components/ForeCast.vue"
+import ForeCast from "../../components/ForeCast.vue";
 
 const splitterModel = ref(40);
 const selected = ref("Food");
@@ -171,7 +171,7 @@ const info = [
         icon: "rocket_launch",
       },
       {
-        label: "预测",
+        label: "数据预测",
         icon: "auto_stories",
       },
     ],

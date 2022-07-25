@@ -5,7 +5,7 @@
  * @Author: 夏明
  * @Date: 2022-07-25 09:51:23
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-25 10:46:45
+ * @LastEditTime: 2022-07-25 21:29:09
  */
 import { ref } from "vue";
 import * as echarts from "echarts";
@@ -28,7 +28,7 @@ export const createContinuousLine = () => {
         type: "continuous",
         seriesIndex: 0,
         min: 0,
-        max: 400,
+        max: 20,
       },
       {
         show: false,
@@ -42,12 +42,12 @@ export const createContinuousLine = () => {
     title: [
       {
         left: "center",
-        text: title.value,
+        text: title.value + "(Y轴渐变)",
       },
       {
         top: "55%",
         left: "center",
-        text: title.value + "(渐变)",
+        text: title.value + "(X轴渐变)",
       },
     ],
     tooltip: {

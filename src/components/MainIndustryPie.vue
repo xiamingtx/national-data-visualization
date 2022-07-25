@@ -46,7 +46,7 @@ const props = defineProps({
   },
   formatter: {
     type: String,
-    default: "{b} : {c}亿元 ({d}%)",
+    default: "{b} : ({c}%)",
   },
 });
 
