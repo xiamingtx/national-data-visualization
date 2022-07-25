@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-24 17:16:53
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-25 00:08:21
+ * @LastEditTime: 2022-07-25 13:21:30
 -->
 <template>
   <div
@@ -34,7 +34,7 @@ import {
 const props = defineProps({
   width: {
     type: Number,
-    default: 550,
+    default: 650,
   },
   height: {
     type: Number,

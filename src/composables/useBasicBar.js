@@ -5,7 +5,7 @@
  * @Author: 夏明
  * @Date: 2022-07-24 17:56:33
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-24 22:31:35
+ * @LastEditTime: 2022-07-25 13:50:21
  */
 import { ref } from "vue";
 import * as echarts from "echarts";
@@ -20,6 +20,10 @@ export const title = ref("");
 
 export const seriesName = ref("");
 
+export const axisLabel = ref({});
+
+export const formatter = ref("{a} <br/>{b}年 : {c}亿元");
+
 export const createBasicBarChart = () => {
   const myChart = echarts.init(bar.value);
   const option = {
@@ -29,7 +33,7 @@ export const createBasicBarChart = () => {
     },
     tooltip: {
       trigger: "item",
-      formatter: "{a} <br/>{b}年 : {c}亿元",
+      formatter: formatter.value,
     },
     legend: {
       orient: "vertical",
@@ -38,8 +42,14 @@ export const createBasicBarChart = () => {
     },
     xAxis: {
       data: optionXData.value,
+      axisLabel: axisLabel.value,
     },
-    yAxis: {},
+    yAxis: {
+      type: "value",
+      axisLabel: {
+        formatter: "{value} 亿元",
+      },
+    },
     series: [
       {
         name: seriesName.value,

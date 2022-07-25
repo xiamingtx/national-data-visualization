@@ -4,7 +4,7 @@
  * @Author: 夏明
  * @Date: 2022-07-24 17:06:30
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-25 00:12:34
+ * @LastEditTime: 2022-07-25 14:11:30
 -->
 <template>
   <div class="page">
@@ -12,11 +12,11 @@
       <div class="header-title">暂仅提供中国数据详细图表!</div>
     </div>
     <div class="content">
-      <q-splitter v-model="splitterModel" style="height: 600px">
+      <q-splitter v-model="splitterModel" style="height: 700px">
         <template v-slot:before>
           <div class="q-pa-md">
             <q-tree
-              :nodes="simple"
+              :nodes="info"
               node-key="label"
               selected-color="primary"
               v-model:selected="selected"
@@ -50,9 +50,32 @@
               <CountryPie :useTimer="false"></CountryPie>
             </q-tab-panel>
 
-            <q-tab-panel name="GDP增长">
-              <div class="text-h4 q-mb-md">中国GDP增长</div>
+            <q-tab-panel name="GDP">
+              <div class="GDP-description" style="font-size: 20px">
+                中国历年GDP使用了两种统计方法:
+                <div
+                  class="Three-industry-description-first"
+                  style="color: darkturquoise"
+                >
+                  1. 基础矩形图统计GDP总量
+                </div>
+                <div
+                  class="Three-industry-description-second"
+                  style="color: lightcoral"
+                >
+                  2. 渐变折线图统计GDP增长率
+                </div>
+              </div>
+            </q-tab-panel>
+
+            <q-tab-panel name="历年GDP">
+              <div class="text-h4 q-mb-md">历年GDP</div>
               <CountryBasicBar></CountryBasicBar>
+            </q-tab-panel>
+
+            <q-tab-panel name="历年GDP增长率">
+              <div class="text-h4 q-mb-md">历年GDP增长率</div>
+              <GDPIncLine></GDPIncLine>
             </q-tab-panel>
 
             <q-tab-panel name="三大产业占比">
@@ -79,6 +102,14 @@
             <q-tab-panel name="历年占比">
               <CountryMultiBar></CountryMultiBar>
             </q-tab-panel>
+
+            <q-tab-panel name="各产业增加值">
+              <IndustriesBar></IndustriesBar>
+            </q-tab-panel>
+
+            <q-tab-panel name="预测">
+              <ForeCast></ForeCast>
+            </q-tab-panel>
           </q-tab-panels>
         </template>
       </q-splitter>
@@ -92,11 +123,14 @@ import CountryPie from "../../components/CountryPie.vue";
 import CountryBasicBar from "../../components/CountryBasicBar.vue";
 import CountryMultiBar from "../../components/CountryMultiBar.vue";
 import MainIndustryPie from "../../components/MainIndustryPie.vue";
+import GDPIncLine from "../../components/GDPIncLine.vue";
+import IndustriesBar from "../../components/IndustriesBar.vue";
+import ForeCast from "../../components/ForeCast.vue"
 
 const splitterModel = ref(40);
 const selected = ref("Food");
 
-const simple = [
+const info = [
   {
     label: "图表",
     children: [
@@ -105,8 +139,18 @@ const simple = [
         icon: "pie_chart",
       },
       {
-        label: "GDP增长",
+        label: "GDP",
         icon: "bar_chart",
+        children: [
+          {
+            label: "历年GDP",
+            icon: "analytics",
+          },
+          {
+            label: "历年GDP增长率",
+            icon: "trending_up",
+          },
+        ],
       },
       {
         label: "三大产业占比",
@@ -121,6 +165,14 @@ const simple = [
             icon: "bar_chart",
           },
         ],
+      },
+      {
+        label: "各产业增加值",
+        icon: "rocket_launch",
+      },
+      {
+        label: "预测",
+        icon: "auto_stories",
       },
     ],
   },

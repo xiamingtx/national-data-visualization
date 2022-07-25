@@ -5,7 +5,7 @@
  * @Author: 夏明
  * @Date: 2022-07-22 22:41:07
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-22 23:28:53
+ * @LastEditTime: 2022-07-25 13:10:47
  */
 import axios from "axios";
 import store from "../store";
@@ -48,7 +48,6 @@ instance.interceptors.response.use(
 
 const handleErrorResponse = (response) => {
   notify.error(response.message);
-
 };
 
 const { get, post, put } = instance;

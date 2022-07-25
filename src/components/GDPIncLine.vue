@@ -2,9 +2,9 @@
  * @Description: Description of this file
  * @Version: 2.0
  * @Author: 夏明
- * @Date: 2022-07-24 18:10:13
+ * @Date: 2022-07-25 09:56:33
  * @LastEditors: 夏明
- * @LastEditTime: 2022-07-25 11:39:58
+ * @LastEditTime: 2022-07-25 10:37:39
 -->
 <template>
   <div
@@ -12,7 +12,7 @@
       width: props.width + 'px',
       height: props.height + 'px',
     }"
-    ref="bar"
+    ref="line"
   ></div>
 </template>
 
@@ -21,20 +21,17 @@ import { ref, onMounted } from "vue";
 import { details } from "../api/country_detail";
 import * as echarts from "echarts";
 import {
-  optionXData,
-  optionYData,
-  bar,
+  dateList,
+  valueList,
+  line,
   title,
-  seriesName,
-  createBasicBarChart,
-  axisLabel,
-  formatter,
-} from "../composables/useBasicBar.js";
+  createContinuousLine,
+} from "../composables/useContinuousLine";
 
 const props = defineProps({
   width: {
     type: Number,
-    default: 900,
+    default: 750,
   },
   height: {
     type: Number,
@@ -42,22 +39,19 @@ const props = defineProps({
   },
 });
 
-const createBar = () => {
-  (optionXData.value = []), (optionYData.value = []);
+const createLine = () => {
+  (dateList.value = []), (valueList.value = []);
   details(1).then((res) => {
     res.data.forEach((item) => {
-      optionXData.value.unshift(item["InfoYear"]);
-      optionYData.value.unshift(item["GDP"]);
+      dateList.value.unshift(item["InfoYear"]);
+      valueList.value.unshift(item["GDPIncRate"]);
     });
-    title.value = "历年GDP";
-    seriesName.value = "GDP";
-    axisLabel.value = {};
-    formatter.value = "{a} <br/>{b}年 : {c}亿元"
-    createBasicBarChart();
+    title.value = "GDP增长率";
+    createContinuousLine();
   });
 };
 
-onMounted(createBar);
+onMounted(createLine);
 </script>
 
 <style lang="scss" scoped></style>
